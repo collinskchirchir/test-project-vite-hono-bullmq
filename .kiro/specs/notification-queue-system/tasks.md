@@ -202,7 +202,7 @@
   - Document Redis connection in environment variables
   - _Requirements: 1.1, 7.1, 7.5_
 
-- [ ] 14. Add environment variable examples
+- [x] 14. Add environment variable examples
   - Create `.env.example` in queue package
   - Document all required environment variables
   - Add comments explaining each variable
