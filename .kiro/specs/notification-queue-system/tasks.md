@@ -188,7 +188,7 @@
   - Add proper error handling and response formatting
   - _Requirements: 5.1, 5.4_
 
-- [ ] 12. Create worker startup script
+- [x] 12. Create worker startup script
   - Create `apps/server/src/workers/start-workers.ts`
   - Import and initialize SMS worker
   - Add graceful shutdown handlers for SIGTERM and SIGINT
