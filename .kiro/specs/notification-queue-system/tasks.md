@@ -84,25 +84,25 @@
   - Export from `queues/index.ts`
   - _Requirements: 1.1, 1.2, 1.4, 2.1_
 
-- [ ] 7. Create job creator functions
-  - [ ] 7.1 Implement welcome SMS job creator
+- [x] 7. Create job creator functions
+  - [x] 7.1 Implement welcome SMS job creator
     - Write `jobs/sms/welcome.job.ts` with `createWelcomeSMSJob()` function
     - Accept typed parameters and optional job options
     - Add job to SMS queue with proper job data structure
     - Return job ID and queue name
     - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
-  - [ ] 7.2 Implement OTP SMS job creator
+  - [x] 7.2 Implement OTP SMS job creator
     - Write `jobs/sms/otp.job.ts` with `createOTPSMSJob()` function
     - Set higher priority for OTP messages
     - Add job to SMS queue with proper job data structure
     - Return job ID and queue name
     - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
-  - [ ] 7.3 Implement notification SMS job creator
+  - [x] 7.3 Implement notification SMS job creator
     - Write `jobs/sms/notification.job.ts` with `createNotificationSMSJob()` function
     - Add job to SMS queue with proper job data structure
     - Return job ID and queue name
     - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
-  - [ ] 7.4 Create job creator exports
+  - [x] 7.4 Create job creator exports
     - Export all SMS job creators from `jobs/sms/index.ts`
     - Export from `jobs/index.ts`
     - _Requirements: 1.4, 5.4_
