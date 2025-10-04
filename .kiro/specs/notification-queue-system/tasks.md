@@ -35,7 +35,7 @@
     - Write `providers/sms/interface.ts` with `SMSProvider` interface
     - Define `SMSResult` type for provider responses
     - _Requirements: 8.1, 8.2_
-  - [ ] 4.2 Implement Salum SMS provider
+  - [x] 4.2 Implement Salum SMS provider
     - Write `providers/sms/salum.provider.ts` implementing `SMSProvider`
     - Implement phone number normalization for Kenyan format
     - Handle Salum API request/response format
