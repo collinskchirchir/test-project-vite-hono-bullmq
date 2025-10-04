@@ -71,7 +71,7 @@
     - Accept `NotificationSMSData` and return `TemplateResult`
     - Pass through generic notification message
     - _Requirements: 2.4, 3.1, 3.2_
-  - [ ] 5.4 Create template exports
+  - [x] 5.4 Create template exports
     - Export all templates from `templates/sms/index.ts`
     - Export from `templates/index.ts`
     - _Requirements: 1.4, 3.4_
