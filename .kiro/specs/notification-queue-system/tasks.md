@@ -118,7 +118,7 @@
   - Export from `workers/index.ts`
   - _Requirements: 2.2, 2.3, 2.4, 2.5, 2.6, 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 9. Create main package exports
+- [x] 9. Create main package exports
   - Write `src/index.ts` exporting all public APIs
   - Export job creators from jobs module
   - Export types from types module
