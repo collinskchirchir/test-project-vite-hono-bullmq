@@ -7,18 +7,18 @@
   - Set up package exports in package.json
   - _Requirements: 1.1, 1.4_
 
-- [ ] 2. Implement configuration layer
-  - [ ] 2.1 Create Redis configuration module
+- [x] 2. Implement configuration layer
+  - [x] 2.1 Create Redis configuration module
     - Write `config/redis.ts` with environment variable support
     - Implement `getRedisConfig()` and `getRedisConnection()` functions
     - Add validation for required Redis configuration
     - _Requirements: 1.1, 1.3, 7.1, 7.2, 7.3, 7.4_
-  - [ ] 2.2 Create queue options configuration
+  - [x] 2.2 Create queue options configuration
     - Write `config/queue-options.ts` with default retry policies
     - Define `defaultQueueOptions` with 3 attempts and exponential backoff
     - Define `defaultWorkerOptions` with concurrency and rate limiting
     - _Requirements: 1.2, 7.2_
-  - [ ] 2.3 Create configuration index exports
+  - [x] 2.3 Create configuration index exports
     - Export all configuration utilities from `config/index.ts`
     - _Requirements: 1.4_
 
