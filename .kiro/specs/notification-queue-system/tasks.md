@@ -107,7 +107,7 @@
     - Export from `jobs/index.ts`
     - _Requirements: 1.4, 5.4_
 
-- [ ] 8. Implement SMS worker
+- [x] 8. Implement SMS worker
   - Create `workers/sms.worker.ts` with `createSMSWorker()` function
   - Implement `processSMSJob()` function with template routing logic
   - Use switch statement to route jobs to appropriate templates
