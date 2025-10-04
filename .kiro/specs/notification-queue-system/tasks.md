@@ -195,7 +195,7 @@
   - Add logging for worker startup and shutdown
   - _Requirements: 4.1, 4.5_
 
-- [ ] 13. Update Docker Compose for Redis
+- [x] 13. Update Docker Compose for Redis
   - Add Redis service to `docker-compose.yml` in server app
   - Configure Redis with persistence
   - Add health check for Redis
