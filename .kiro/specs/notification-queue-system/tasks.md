@@ -76,7 +76,7 @@
     - Export from `templates/index.ts`
     - _Requirements: 1.4, 3.4_
 
-- [ ] 6. Implement SMS queue
+- [x] 6. Implement SMS queue
   - Create `queues/sms.queue.ts` with BullMQ Queue instance
   - Configure queue with Redis connection and default options
   - Export `SMS_QUEUE_NAME` constant and `smsQueue` instance
