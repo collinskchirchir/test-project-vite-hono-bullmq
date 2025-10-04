@@ -56,17 +56,17 @@
     - _Requirements: 1.4_
 
 - [ ] 5. Create SMS templates
-  - [ ] 5.1 Implement welcome SMS template
+  - [x] 5.1 Implement welcome SMS template
     - Write `templates/sms/welcome.ts` with `renderWelcomeSMS()` function
     - Accept `WelcomeSMSData` and return `TemplateResult`
     - Format welcome message with user name
     - _Requirements: 2.4, 3.1, 3.2_
-  - [ ] 5.2 Implement OTP SMS template
+  - [x] 5.2 Implement OTP SMS template
     - Write `templates/sms/otp.ts` with `renderOTPSMS()` function
     - Accept `OTPSMSData` and return `TemplateResult`
     - Format OTP message with code and expiry time
     - _Requirements: 2.4, 3.1, 3.2_
-  - [ ] 5.3 Implement notification SMS template
+  - [x] 5.3 Implement notification SMS template
     - Write `templates/sms/notification.ts` with `renderNotificationSMS()` function
     - Accept `NotificationSMSData` and return `TemplateResult`
     - Pass through generic notification message
