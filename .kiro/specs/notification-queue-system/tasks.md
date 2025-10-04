@@ -179,7 +179,7 @@
     - Add FAQ section
     - _Requirements: 1.3, 2.3, 4.3_
 
-- [ ] 11. Create example usage in HonoJS API
+- [x] 11. Create example usage in HonoJS API
   - Create example route in `apps/server/src/routes/notifications.ts`
   - Import job creators from `@repo/queue`
   - Implement POST endpoint to send welcome SMS
