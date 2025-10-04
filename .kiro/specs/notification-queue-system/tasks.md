@@ -1,0 +1,210 @@
+# Implementation Plan
+
+- [ ] 1. Set up queue package structure and dependencies
+  - Create `packages/queue` directory with package.json
+  - Install BullMQ, Redis client (ioredis), and Zod for validation
+  - Configure TypeScript with proper module resolution
+  - Set up package exports in package.json
+  - _Requirements: 1.1, 1.4_
+
+- [ ] 2. Implement configuration layer
+  - [ ] 2.1 Create Redis configuration module
+    - Write `config/redis.ts` with environment variable support
+    - Implement `getRedisConfig()` and `getRedisConnection()` functions
+    - Add validation for required Redis configuration
+    - _Requirements: 1.1, 1.3, 7.1, 7.2, 7.3, 7.4_
+  - [ ] 2.2 Create queue options configuration
+    - Write `config/queue-options.ts` with default retry policies
+    - Define `defaultQueueOptions` with 3 attempts and exponential backoff
+    - Define `defaultWorkerOptions` with concurrency and rate limiting
+    - _Requirements: 1.2, 7.2_
+  - [ ] 2.3 Create configuration index exports
+    - Export all configuration utilities from `config/index.ts`
+    - _Requirements: 1.4_
+
+- [ ] 3. Define TypeScript types and interfaces
+  - Create `types/index.ts` with all job data types
+  - Define `BaseJobData`, `SMSRecipient` interfaces
+  - Define `WelcomeSMSData`, `OTPSMSData`, `NotificationSMSData` types
+  - Create discriminated union `SMSJobData` type
+  - Define `TemplateResult`, `JobOptions` interfaces
+  - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+
+- [ ] 4. Implement SMS provider system
+  - [ ] 4.1 Create provider interface and types
+    - Write `providers/sms/interface.ts` with `SMSProvider` interface
+    - Define `SMSResult` type for provider responses
+    - _Requirements: 8.1, 8.2_
+  - [ ] 4.2 Implement Salum SMS provider
+    - Write `providers/sms/salum.provider.ts` implementing `SMSProvider`
+    - Implement phone number normalization for Kenyan format
+    - Handle Salum API request/response format
+    - Add error handling for API failures
+    - _Requirements: 2.2, 2.6_
+  - [ ] 4.3 Implement mock SMS provider for development
+    - Write `providers/sms/mock.provider.ts` implementing `SMSProvider`
+    - Log messages to console instead of sending
+    - _Requirements: 2.2_
+  - [ ] 4.4 Create provider factory
+    - Write `providers/sms/factory.ts` with `createSMSProvider()` function
+    - Support environment-based provider selection
+    - Default to mock provider for development
+    - _Requirements: 7.1, 7.3_
+  - [ ] 4.5 Create provider exports
+    - Export factory and interface from `providers/sms/index.ts`
+    - Export from `providers/index.ts`
+    - _Requirements: 1.4_
+
+- [ ] 5. Create SMS templates
+  - [ ] 5.1 Implement welcome SMS template
+    - Write `templates/sms/welcome.ts` with `renderWelcomeSMS()` function
+    - Accept `WelcomeSMSData` and return `TemplateResult`
+    - Format welcome message with user name
+    - _Requirements: 2.4, 3.1, 3.2_
+  - [ ] 5.2 Implement OTP SMS template
+    - Write `templates/sms/otp.ts` with `renderOTPSMS()` function
+    - Accept `OTPSMSData` and return `TemplateResult`
+    - Format OTP message with code and expiry time
+    - _Requirements: 2.4, 3.1, 3.2_
+  - [ ] 5.3 Implement notification SMS template
+    - Write `templates/sms/notification.ts` with `renderNotificationSMS()` function
+    - Accept `NotificationSMSData` and return `TemplateResult`
+    - Pass through generic notification message
+    - _Requirements: 2.4, 3.1, 3.2_
+  - [ ] 5.4 Create template exports
+    - Export all templates from `templates/sms/index.ts`
+    - Export from `templates/index.ts`
+    - _Requirements: 1.4, 3.4_
+
+- [ ] 6. Implement SMS queue
+  - Create `queues/sms.queue.ts` with BullMQ Queue instance
+  - Configure queue with Redis connection and default options
+  - Export `SMS_QUEUE_NAME` constant and `smsQueue` instance
+  - Implement `closeSMSQueue()` for graceful shutdown
+  - Export from `queues/index.ts`
+  - _Requirements: 1.1, 1.2, 1.4, 2.1_
+
+- [ ] 7. Create job creator functions
+  - [ ] 7.1 Implement welcome SMS job creator
+    - Write `jobs/sms/welcome.job.ts` with `createWelcomeSMSJob()` function
+    - Accept typed parameters and optional job options
+    - Add job to SMS queue with proper job data structure
+    - Return job ID and queue name
+    - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 7.2 Implement OTP SMS job creator
+    - Write `jobs/sms/otp.job.ts` with `createOTPSMSJob()` function
+    - Set higher priority for OTP messages
+    - Add job to SMS queue with proper job data structure
+    - Return job ID and queue name
+    - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 7.3 Implement notification SMS job creator
+    - Write `jobs/sms/notification.job.ts` with `createNotificationSMSJob()` function
+    - Add job to SMS queue with proper job data structure
+    - Return job ID and queue name
+    - _Requirements: 2.1, 2.2, 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 7.4 Create job creator exports
+    - Export all SMS job creators from `jobs/sms/index.ts`
+    - Export from `jobs/index.ts`
+    - _Requirements: 1.4, 5.4_
+
+- [ ] 8. Implement SMS worker
+  - Create `workers/sms.worker.ts` with `createSMSWorker()` function
+  - Implement `processSMSJob()` function with template routing logic
+  - Use switch statement to route jobs to appropriate templates
+  - Initialize SMS provider using factory
+  - Send SMS via provider and handle results
+  - Add event listeners for completed, failed, and error events
+  - Implement `closeSMSWorker()` for graceful shutdown
+  - Export from `workers/index.ts`
+  - _Requirements: 2.2, 2.3, 2.4, 2.5, 2.6, 4.1, 4.2, 4.3, 4.4, 4.5_
+
+- [ ] 9. Create main package exports
+  - Write `src/index.ts` exporting all public APIs
+  - Export job creators from jobs module
+  - Export types from types module
+  - Export queue instances for monitoring
+  - Export worker creators for running workers
+  - Export configuration utilities
+  - _Requirements: 1.4, 5.4, 6.3_
+
+- [ ] 10. Add package documentation
+  - [ ] 10.1 Create main README.md
+    - Write package overview and purpose
+    - Add quick start guide with installation
+    - Include basic usage examples for each job type
+    - Add API reference summary
+    - Link to detailed documentation
+    - _Requirements: 1.4, 5.4_
+  - [ ] 10.2 Create getting started guide
+    - Write `docs/getting-started.md` with prerequisites
+    - Add installation instructions
+    - Document environment variable setup
+    - Provide example of running first job
+    - Show how to run workers locally
+    - _Requirements: 7.1, 7.2, 7.3_
+  - [ ] 10.3 Create architecture documentation
+    - Write `docs/architecture.md` with high-level overview
+    - Document component descriptions and responsibilities
+    - Explain data flow through the system
+    - Document design decisions and rationale
+    - _Requirements: 6.1, 6.2, 6.3_
+  - [ ] 10.4 Create usage guide
+    - Write `docs/usage.md` with detailed examples
+    - Show usage from HonoJS API endpoints
+    - Show usage from Next.js application
+    - Document job options (priority, delay, custom IDs)
+    - Explain queue monitoring and management
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 10.5 Create template addition guide
+    - Write `docs/adding-templates.md` with step-by-step instructions
+    - Show how to add new SMS templates
+    - Show how to add new notification types (email)
+    - Include code examples and file structure
+    - Document type safety considerations
+    - _Requirements: 3.4, 6.1, 6.2, 6.3, 6.4, 6.5_
+  - [ ] 10.6 Create deployment guide
+    - Write `docs/deployment.md` with deployment strategies
+    - Document separate worker process deployment
+    - Document same-process deployment for development
+    - Add environment variables for production
+    - Explain horizontal scaling strategies
+    - Document Redis configuration for production
+    - _Requirements: 7.1, 7.2, 7.5_
+  - [ ] 10.7 Create troubleshooting guide
+    - Write `docs/troubleshooting.md` with common issues
+    - Document Redis connection problems and solutions
+    - Explain worker debugging techniques
+    - Add job failure debugging steps
+    - Include performance optimization tips
+    - Add FAQ section
+    - _Requirements: 1.3, 2.3, 4.3_
+
+- [ ] 11. Create example usage in HonoJS API
+  - Create example route in `apps/server/src/routes/notifications.ts`
+  - Import job creators from `@repo/queue`
+  - Implement POST endpoint to send welcome SMS
+  - Implement POST endpoint to send OTP SMS
+  - Implement POST endpoint to send notification SMS
+  - Add proper error handling and response formatting
+  - _Requirements: 5.1, 5.4_
+
+- [ ] 12. Create worker startup script
+  - Create `apps/server/src/workers/start-workers.ts`
+  - Import and initialize SMS worker
+  - Add graceful shutdown handlers for SIGTERM and SIGINT
+  - Add logging for worker startup and shutdown
+  - _Requirements: 4.1, 4.5_
+
+- [ ] 13. Update Docker Compose for Redis
+  - Add Redis service to `docker-compose.yml` in server app
+  - Configure Redis with persistence
+  - Add health check for Redis
+  - Document Redis connection in environment variables
+  - _Requirements: 1.1, 7.1, 7.5_
+
+- [ ] 14. Add environment variable examples
+  - Create `.env.example` in queue package
+  - Document all required environment variables
+  - Add comments explaining each variable
+  - Include both development and production examples
+  - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
