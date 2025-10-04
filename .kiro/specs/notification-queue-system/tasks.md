@@ -45,7 +45,7 @@
     - Write `providers/sms/mock.provider.ts` implementing `SMSProvider`
     - Log messages to console instead of sending
     - _Requirements: 2.2_
-  - [ ] 4.4 Create provider factory
+  - [x] 4.4 Create provider factory
     - Write `providers/sms/factory.ts` with `createSMSProvider()` function
     - Support environment-based provider selection
     - Default to mock provider for development
