@@ -31,7 +31,7 @@
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
 - [ ] 4. Implement SMS provider system
-  - [ ] 4.1 Create provider interface and types
+  - [x] 4.1 Create provider interface and types
     - Write `providers/sms/interface.ts` with `SMSProvider` interface
     - Define `SMSResult` type for provider responses
     - _Requirements: 8.1, 8.2_
