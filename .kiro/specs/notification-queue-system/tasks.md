@@ -30,7 +30,7 @@
   - Define `TemplateResult`, `JobOptions` interfaces
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
-- [ ] 4. Implement SMS provider system
+- [x] 4. Implement SMS provider system
   - [x] 4.1 Create provider interface and types
     - Write `providers/sms/interface.ts` with `SMSProvider` interface
     - Define `SMSResult` type for provider responses
@@ -50,7 +50,7 @@
     - Support environment-based provider selection
     - Default to mock provider for development
     - _Requirements: 7.1, 7.3_
-  - [ ] 4.5 Create provider exports
+  - [x] 4.5 Create provider exports
     - Export factory and interface from `providers/sms/index.ts`
     - Export from `providers/index.ts`
     - _Requirements: 1.4_
