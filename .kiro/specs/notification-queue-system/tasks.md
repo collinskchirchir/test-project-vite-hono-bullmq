@@ -41,7 +41,7 @@
     - Handle Salum API request/response format
     - Add error handling for API failures
     - _Requirements: 2.2, 2.6_
-  - [ ] 4.3 Implement mock SMS provider for development
+  - [x] 4.3 Implement mock SMS provider for development
     - Write `providers/sms/mock.provider.ts` implementing `SMSProvider`
     - Log messages to console instead of sending
     - _Requirements: 2.2_
